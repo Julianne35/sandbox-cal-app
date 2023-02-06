@@ -1,0 +1,54 @@
+.react-time-picker__wrapper,
+.react-date-picker__wrapper {
+  border-radius: 0.3rem;
+  border: 1px solid #ced4da;
+  padding: 0.3rem;
+}
+
+.react-time-picker__inputGroup,
+.react-time-picker__inputGroup__input,
+.react-date-picker__inputGroup,
+.react-date-picker__inputGroup__input {
+  color: #71757d;
+}
+
+.react-time-picker__inputGroup__input:focus,
+.react-date-picker__inputGroup__input:focus {
+  outline: 1px solid #ced4da;
+  background-color: rgba(128, 128, 128, 0.216);
+  border-radius: 0.3rem;
+}
+
+.react-time-picker__button,
+.react-date-picker__button {
+  font-size: small;
+  border-radius: 0.2rem;
+  background-color: rgba(128, 128, 128, 0.216);
+}
+
+.react-time-picker__button:hover,
+.react-date-picker__button:hover {
+  font-size: small;
+  background-color: rgba(128, 128, 128, 0.495);
+}
+
+.react-time-picker__button:enabled {
+  width: 6.5rem;
+}
+
+.react-time-picker,
+.react-date-picker {
+  display: flex;
+}
+
+.react-time-picker__button,
+.react-date-picker__button {
+  margin-left: 5px;
+}
+
+@media screen and (max-width:360px) {
+  .react-time-picker__wrapper,
+  .react-date-picker__wrapper {
+    width: 57vw;
+  }
+}

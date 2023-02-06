@@ -1,0 +1,32 @@
+.header {
+  padding: 1rem;
+  text-align: center;
+}
+
+.padding {
+  margin-bottom: 1rem;
+}
+
+.register-text {
+  margin-top: 0.5rem;
+  font-size: 0.8rem !important;
+  text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+.link:hover {
+  color: #ced4da;
+}
+
+.btn {
+  background-color: teal !important;
+  margin: 0 0 .2rem 5px;
+  padding: .5rem .6rem .2rem .6rem;
+  border-radius: .2rem;
+  color: whitesmoke;
+}
