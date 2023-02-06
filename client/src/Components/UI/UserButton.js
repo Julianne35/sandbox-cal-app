@@ -1,16 +1,17 @@
-import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import style from "../UI/UserBtn.module.css";
 
 const UserButton = (props) => {
-  const linkClass = style["login-btn"];
-  const path = { pathname: `${props.linkTo}` };
+  const btnClass = style["login-btn"];
+  const btnHref = props.btnPath;
+  const btnType = props.btnType;
+
   return (
-    <Link className={linkClass} to={path}>
+    <Button className={btnClass} href={btnHref} type={btnType}>
       {props.children}
-    </Link>
+    </Button>
   );
 };
 
 export default UserButton;
-
-//cannot use with Heroku- Link from react router works only, page breats with CANNOT GET / when using href
+//props.cname - for className

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TimePicker from "react-time-picker";
 import DatePicker from "react-date-picker";
 import Wrapper from "../UI/Wrapper";
 import style from "./Create.module.css";
 import globalStyle from "../UI/style.css";
-import UserButton from "../UI/UserButton";
 import { Form, Button, InputGroup } from "react-bootstrap";
+import UserButton from "../UI/UserButton";
 
 const CreateEvent = () => {
   const [contactname, setContactName] = useState("");
@@ -32,14 +32,29 @@ const CreateEvent = () => {
   const cityInput = style.cityInput;
   const upload = style.uploadBtn;
 
+  useEffect(() => {
+    axios({
+      method: "POST",
+      url: "http://localhost:3000/post",
+      data: {
+        event: event,
+        details: details,
+      },
+    }).then((res) => {
+      console.log("resp", res.data);
+    });
+  }, [details]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     //function needed to post address prop (first step)
+
     setEventAddress((eventaddress) => [
       ...eventaddress,
       { street: street, city: city, state: state, zipcode: zipcode },
+      console.log("address", street, city, state, zipcode),
     ]);
+
     setDetails((details) => [
       ...details,
       {
@@ -53,24 +68,13 @@ const CreateEvent = () => {
     ]);
   };
 
-  axios({
-    method: "POST",
-    url: "http://localhost:3000/post",
-    data: {
-      details: details,
-      event: event,
-    },
-  }).then((res) => {
-    console.log("resp", res.data);
-  });
-
   return (
     <>
       <Wrapper>
         <h1 className={header}>Create Event</h1>
         <h2 className={subHeader}>Contact Info</h2>
         <hr />
-        <Form action="/post" method="post">
+        <Form action="/post" method="post" onSubmit={handleSubmit}>
           <Form.Group className={padding} controlId="contactname">
             <Form.Control
               type="text"
@@ -189,11 +193,8 @@ const CreateEvent = () => {
             <Form.Control as="textarea" placeholder="Event Description" />
           </InputGroup>
 
-          <UserButton
-            linkTo={subLink}
-            className={style.btn}
-            onClick={handleSubmit}
-          >
+          {/* NOTE: data will not POST if you use link prop. in DEV (use history prop) */}
+          <UserButton className={style.btn} onClick={handleSubmit}>
             CREATE AND REVIEW
           </UserButton>
         </Form>
@@ -204,3 +205,11 @@ const CreateEvent = () => {
 export default CreateEvent;
 
 //will not post unless all data fields are being called, you cant just test out one field at a time unless you comment data on model on server
+/*  <UserLink
+    linkTo={subLink} <--cannot use if posting to DB (will bypass onClick function)
+    onClick={handleSubmit}
+    >
+    CREATE AND REVIEW   
+    </UserLink> */
+
+// <button type="submit">click me</button>
